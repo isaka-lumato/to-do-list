@@ -31,6 +31,8 @@ To get a local copy up and running follow these simple example steps.
 
 Clone the repo with `git clone https://github.com/isaka-lumato/to-do-list.git`
 
+Type `cd to-do-list` to access the project on the terminal
+
 Run `npx hint .` to test for html linting check
 
 Run `npx stylelint "**/*.{css,scss}"` to test for css linting check
