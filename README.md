@@ -31,7 +31,7 @@ To get a local copy up and running follow these simple example steps.
 
 Clone the repo with `git clone https://github.com/isaka-lumato/to-do-list.git`
 
-Type `cd to-do-list` to access the project on the terminal
+Type `cd to-do-list` on the terminal to access the project 
 
 Run npm i to install the dependencies
 
