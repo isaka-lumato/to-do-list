@@ -33,6 +33,10 @@ Clone the repo with `git clone https://github.com/isaka-lumato/to-do-list.git`
 
 Type `cd to-do-list` to access the project on the terminal
 
+Run npm i to install the dependencies
+
+Run npm start to start the application
+
 Run `npx hint .` to test for html linting check
 
 Run `npx stylelint "**/*.{css,scss}"` to test for css linting check
