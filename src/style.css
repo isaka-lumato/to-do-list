@@ -4,9 +4,9 @@ h1 {
 }
 
 .container {
-  width: 65%;
+  width: 50%;
   height: auto;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.87);
   margin: 0 auto;
 }
 
