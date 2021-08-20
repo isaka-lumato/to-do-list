@@ -1,44 +1,31 @@
 import './style.css';
 import completedStatus from './completed.js';
+import Storage from '../storage.js';
+import {
+  newToDo,
+  todoDelete,
+} from './newFunctionality.js';
 
-let arr = [
-  {
-    description: 'do exercises before lunch',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'complete all assignments',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'clean my house',
-    completed: false,
-    index: 2,
-  },
-];
+const userInput = document.querySelector('#task');
+const form = document.querySelector('#my-form');
+const button = document.querySelector('#enter-task');
+const delAllBut = document.querySelector('#all-completed');
 const listParent = document.querySelector('#all-tasks');
-
-const getData = () => {
-  if (localStorage.getItem('arr') !== null) {
-    arr = JSON.parse(localStorage.getItem('arr'));
-  }
-};
+const arr = [];
+if (Storage.isEmpty()) {
+  Storage.set(arr);
+}
 
 const display = () => {
-  const local = localStorage.getItem('arr');
-  if (local !== null) {
-    arr = JSON.parse(localStorage.getItem('arr'));
-  } else {
-    localStorage.setItem('arr', JSON.stringify(arr));
-    getData();
-  }
-
+  const local = Storage.get();
+  let index = 0;
   listParent.innerHTML = '';
-  arr.forEach((task) => {
+  local.forEach((task) => {
     const eachTask = document.createElement('div');
     eachTask.className = 'eachTask';
+    eachTask.setAttribute('data-id', index);
+    local[index].index = index;
+    index += 1;
 
     const list = document.createElement('div');
     list.className = 'group-list';
@@ -49,8 +36,8 @@ const display = () => {
     input.id = task.id;
     input.checked = task.completed;
     /* eslint-disable */
-    input.addEventListener('change', () => {
-      completedStatus(task, arr);
+    input.addEventListener('change', (e) => {
+      completedStatus(e.target, e.target.parentNode.parentNode.getAttribute('data-id'), label);
     });
     /* eslint-enable */
     list.appendChild(input);
@@ -58,19 +45,45 @@ const display = () => {
     const label = document.createElement('label');
     label.innerHTML = `${task.description}`;
     label.className = 'task-name';
+    label.setAttribute('contenteditable', 'true');
     list.appendChild(label);
 
     eachTask.appendChild(list);
 
     const button = document.createElement('button');
-    button.innerHTML = '<i class="fas fa-ellipsis-v">';
+    button.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
     button.className = 'menu-icon';
     eachTask.appendChild(button);
 
     const separatingLine = document.createElement('hr');
     listParent.appendChild(eachTask);
     listParent.appendChild(separatingLine);
+    Storage.set(local);
+    const btnId = button.parentNode.getAttribute('data-id');
+    const btnNode = button.parentNode;
+    if (task.checked) {
+      label.classList.add('task-name');
+      input.checked = true;
+    }
+
+    button.addEventListener('click', () => {
+      todoDelete(btnId, btnNode);
+    });
   });
 };
+
+button.addEventListener('click', (e) => {
+  e.preventDefault();
+  newToDo(userInput.value);
+  display();
+  form.reset();
+});
+
+delAllBut.addEventListener('click', () => {
+  let allStorage = Storage.get();
+  allStorage = allStorage.filter((elem) => elem.checked !== true);
+  Storage.set(allStorage);
+  display();
+});
 
 window.onload = display();
