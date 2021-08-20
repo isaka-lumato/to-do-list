@@ -80,3 +80,7 @@ h1 {
   background: transparent;
   border: none;
 }
+
+.box:checked + .task-name {
+  text-decoration: line-through;
+}
