@@ -26,7 +26,6 @@ const getData = () => {
   }
 };
 
-
 const display = () => {
   const local = localStorage.getItem('arr');
   if (local !== null) {
@@ -38,7 +37,7 @@ const display = () => {
 
   listParent.innerHTML = '';
   arr.forEach((task) => {
-      const eachTask = document.createElement('div');
+    const eachTask = document.createElement('div');
     eachTask.className = 'eachTask';
 
     const list = document.createElement('div');
@@ -71,7 +70,6 @@ const display = () => {
     const separatingLine = document.createElement('hr');
     listParent.appendChild(eachTask);
     listParent.appendChild(separatingLine);
-
   });
 };
 
