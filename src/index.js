@@ -1,7 +1,7 @@
 import './style.css';
 import completedStatus from './completed.js';
 
-const arr = [
+let arr = [
   {
     description: 'do exercises before lunch',
     completed: false,
@@ -20,7 +20,22 @@ const arr = [
 ];
 const listParent = document.querySelector('#all-tasks');
 
+const getData = () => {
+  if (localStorage.getItem('arr') !== null) {
+    arr = JSON.parse(localStorage.getItem('arr'));
+  }
+};
+
+
 const display = () => {
+  const local = localStorage.getItem('arr');
+  if (local !== null) {
+    arr = JSON.parse(localStorage.getItem('arr'));
+  } else {
+    localStorage.setItem('arr', JSON.stringify(arr));
+    getData();
+  }
+
   listParent.innerHTML = '';
   arr.forEach((task) => {
       const eachTask = document.createElement('div');
@@ -54,8 +69,8 @@ const display = () => {
     eachTask.appendChild(button);
 
     const separatingLine = document.createElement('hr');
-    eachTask.appendChild(separatingLine);
     listParent.appendChild(eachTask);
+    listParent.appendChild(separatingLine);
 
   });
 };
