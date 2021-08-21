@@ -84,3 +84,9 @@ h1 {
 .box:checked + .task-name {
   text-decoration: line-through;
 }
+
+.editInput {
+  position: absolute;
+  width: 37%;
+  right: 32.5%;
+}
