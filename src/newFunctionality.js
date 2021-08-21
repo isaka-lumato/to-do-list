@@ -27,8 +27,22 @@ const todoDelete = (btnId, btnNode) => {
   Storage.set(storageGet);
 };
 
-const edit = (edElement) => {
-  edElement.setAttribute('contenteditable', 'true');
+const edit = (e) => {
+  const descriptionText = e.target.parentNode.childNodes[0].childNodes[1];
+  const index = e.target.parentNode.getAttribute('data-id');
+  const descriptionInput = document.createElement('input');
+  descriptionInput.classList = 'editInput';
+  e.target.parentNode.parentNode.childNodes[0].append(descriptionInput);
+  descriptionInput.value = descriptionText.innerHTML;
+  descriptionInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      descriptionText.innerText = descriptionInput.value;
+      descriptionInput.remove();
+      const storage = Storage.get();
+      storage[index].description = descriptionText.innerText;
+      Storage.set(storage);
+    }
+  });
 };
 
 export {

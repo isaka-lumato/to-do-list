@@ -43,10 +43,11 @@ const display = () => {
     /* eslint-enable */
     list.appendChild(input);
 
+    const editBtn = document.createElement('button');
     const label = document.createElement('label');
+    editBtn.innerHTML = 'edit';
     label.innerHTML = `${task.description}`;
     label.className = 'task-name';
-    edit(label);
     list.appendChild(label);
 
     eachTask.appendChild(list);
@@ -54,6 +55,7 @@ const display = () => {
     const button = document.createElement('button');
     button.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
     button.className = 'menu-icon';
+    eachTask.appendChild(editBtn);
     eachTask.appendChild(button);
 
     const separatingLine = document.createElement('hr');
@@ -70,6 +72,10 @@ const display = () => {
     button.addEventListener('click', () => {
       todoDelete(btnId, btnNode);
       display();
+    });
+
+    editBtn.addEventListener('click', (e) => {
+      edit(e);
     });
   });
 };
