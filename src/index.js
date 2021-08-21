@@ -4,6 +4,7 @@ import Storage from '../storage.js';
 import {
   newToDo,
   todoDelete,
+  edit,
 } from './newFunctionality.js';
 
 const userInput = document.querySelector('#task');
@@ -45,7 +46,7 @@ const display = () => {
     const label = document.createElement('label');
     label.innerHTML = `${task.description}`;
     label.className = 'task-name';
-    label.setAttribute('contenteditable', 'true');
+    edit(label);
     list.appendChild(label);
 
     eachTask.appendChild(list);
@@ -68,6 +69,7 @@ const display = () => {
 
     button.addEventListener('click', () => {
       todoDelete(btnId, btnNode);
+      display();
     });
   });
 };

@@ -27,7 +27,12 @@ const todoDelete = (btnId, btnNode) => {
   Storage.set(storageGet);
 };
 
+const edit = (edElement) => {
+  edElement.setAttribute('contenteditable', 'true');
+};
+
 export {
   newToDo,
   todoDelete,
+  edit,
 };
